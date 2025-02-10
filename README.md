@@ -14,6 +14,6 @@ The developer using a trained YOLO model in another pickleball dataset, predict 
 - Install Ultrlytics library
 - Change the "model", "input_folder", "output_folder" filepath
 - Run "python3 yolo_detect.py" in terminal
-- 
+
 # Step 3: Refine the Bounding Boxes Annotations using Roboflow
 **Using Roboflow to visualize and refine the bounding boxes to best accuracy.** 
