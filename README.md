@@ -8,3 +8,6 @@ The developer (aka. me) merge the video of single player match and the video of 
 
 
 # Step 2: Auto label using YOLO
+**Using trained YOLO model (yolopickleball.pt) to auto label the ball in frames.** 
+### 
+The developer using a trained YOLO model in another pickleball dataset, predict bounding boxes in these frames and keep only the box have highest confidence score.
