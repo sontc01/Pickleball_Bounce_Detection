@@ -17,3 +17,8 @@ The developer using a trained YOLO model in another pickleball dataset, predict 
 
 # Step 3: Refine the Bounding Boxes Annotations using Roboflow
 **Using Roboflow to visualize and refine the bounding boxes to best accuracy.** 
+
+# Step 4: Create Categories Dataset for CatBoostRegressor model
+**Using the videos and frames to label the .csv file consist of 5 categories: "file name", "visibility", "x-coordinate", "y-coordinate", "status".** 
+### 
+The developer using the videos to check when the ball is flying, hitting or bounding (0,1,2) and when the ball is visibility with 4 VC (Visibility Class).
