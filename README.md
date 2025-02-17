@@ -21,4 +21,7 @@ The developer using a trained YOLO model in another pickleball dataset, predict 
 # Step 4: Create Categories Dataset for CatBoostRegressor model
 **Using the videos and frames to label the .csv file consist of 5 categories: "file name", "visibility", "x-coordinate", "y-coordinate", "status".** 
 ### 
-The developer using the videos to check when the ball is flying, hitting or bounding (0,1,2) and when the ball is visibility with 4 VC (Visibility Class).
+The developer first renames the images in the dataset using "image_renames.py" and make application "visibility_labeltool.py", "status_tool.py" to visualize the image and update VC annotations, status annotations of the .csv file.
+ - Rename the images in dataset
+ - Make the .csv label file with "CBR_Data_Gen.py". Remember to take images and .txt YOLO label format as input.
+ - 
