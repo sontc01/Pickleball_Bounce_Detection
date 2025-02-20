@@ -1,10 +1,10 @@
 # Step 2.1: Data Preparation
-**Using OpenCV to trim the video into frames in numerical order and time stamps.** 
+**From CatBoostRegressor Dataset, we need to modify data labels from the label file into Catboost format.** 
 ###
-The developer (aka. me) merge the video of single player match and the video of couple player match into 1 video to easily naming the frames with the mean density is 5 frames per second (FPS).
-- Prepare the pickleball video
-- Change the "video_path" and "output_folder" filepath
-- Run "python3 frames_gen.py" in terminal    
+From categorie "file name", the developer split into 2 categories "file name" + "time stamp" in numerical format.
+- Prepare the CatBoostRegressor .csv dataset file
+- Run rename_dataset.py 
+- Using spreadsheet software like exel, gg sheet to make time stamps with 0.2s steps
 
 
 # Step 1.2: Auto label using YOLO
