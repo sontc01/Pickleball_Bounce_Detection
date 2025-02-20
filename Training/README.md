@@ -4,32 +4,26 @@
 From categorie "file name", the developer split into 2 categories "file name" + "time stamp" in numerical format.
 - Prepare the CatBoostRegressor .csv dataset file
 - Run rename_dataset.py 
-- Using spreadsheet software like exel, gg sheet to make time stamps with 0.2s steps
+- Using spreadsheet software like exel, gg sheet to make time stamps with 0.2s per step
+- Make sure the dataset folder have format game{i}/clip{i}/Label.csv
 
 
-# Step 1.2: Auto label using YOLO
-**Using trained YOLO model (yolopickleball.pt) to auto label the ball in frames.** 
+# Step 2.2: Create features
+**Now from "x-coordinate" and "y-coordinate" we can create some features to feed into the model.** 
 ### 
-The developer using a trained YOLO model in another pickleball dataset, predict bounding boxes in these frames and keep only the box have highest confidence score.
-- Install Ultrlytics library
-- Change the "model", "input_folder", "output_folder" filepath
-- Run "python3 yolo_detect.py" in terminal
+The developer took 3 consecutive frames, made features like difference between x and y coordinates of neighboring points, distance relations between previous and the following ball points.
+- Coordinate difference (x - x_lag), difference inverse (x_lead - x), divide (x_diff / x_diff_inv)
+- Using binary test with threshold = 0.5 for prediction function
+- Run "python3 bounce_train.py --path_dataset --path_save_model" in terminal
 
-# Step 1.3: Refine the Bounding Boxes Annotations using Roboflow
-**Using Roboflow to visualize and refine the bounding boxes to best accuracy.** 
+# Step 2.3: Create extend features for better "recall score"
+**With the time stamp (0.2s per step) categorie, we can create acceleration features to improve training results.** 
+From time stamp, x_diff, y_diff, etc... the developer create velocity feature and acceleration feature.
+- Velocity (x_diff / time_diff), velocity inverse (x_diff_inv / time_diff), acceleration (v_diff / time_diff)
+- Run "python3 bounce_train_extend.py --path_dataset --path_save_model" in terminal
 
-# Step 1.4: Create Categories Dataset for CatBoostRegressor model
-**Using the videos and frames to label the .csv file consist of 5 categories: "file name", "visibility", "x-coordinate", "y-coordinate", "status".** 
-### 
-The developer first renames the images in the dataset using "image_renames.py" and make application "visibility_labeltool.py", "status_labeltool.py" to visualize the image and update VC annotations, status annotations of the .csv file.
- - Rename the images in dataset
- - Make the .csv label file with "CBR_Data_Gen.py". Remember to take images and .txt YOLO label format as input.
- - Using "refine_csv_name.py" to make sure that "file name" column in label file is correspond to image's file name.
- - Uisng Tkinter lib to make labeling application "visibility_labeltool.py" and "status_labeltool.py" to accelerate annotating tasks.
-
-# Dataset Summarize
-**With the requirements of data format for CatBoostRegressor model, the developer prepare the ".csv" dataset from 2 Pickleball Video in single player and couple player (total 3 minutes). The videos are trimmed into 961 frames and being labeled carefully.** 
- - 5 Categories: "file name", "visibility", "x-coordinate", "y-coordinate", "status"
- - Status categorie consist of 3 states: 0 - Flying; 1 - Hitting: 2 - Bounding
- - The TrackNet model using all 5 categories
- - The Bound Detection application using just 3 categories ("file name", "x-coordinate", "y-coordinate") to detect the "status"
+# Training Summarize
+**Using 960 rows Pickleball events dataset in .csv format, we can obtain an comparable results hereafter.** 
+ - As a baseline, we retrain the model with Tennis Dataset and obtain 4643 rows of test set, accuracy = 0.982 and recall = 0.624 
+ - With our Pickleball events dataset, we obtain 98 rows of test set, accuracy = 0.928 and recall = 0.428
+ - Then we add extend features and SMOTE (imbalance technique) to improve the sensitivity of model, we obtain 98 rows of test set, accuracy = 0.898 and recall = 0.571
