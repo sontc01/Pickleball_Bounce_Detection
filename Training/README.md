@@ -23,6 +23,8 @@ From time stamp, x_diff, y_diff, etc... the developer create velocity feature an
 - Run "python3 bounce_train_extend.py --path_dataset --path_save_model" in terminal
 
 # Training Summarize
+![image](https://github.com/user-attachments/assets/aef79483-c7fd-496c-9599-ca0fc2dfd16c)
+
 **Using 960 rows Pickleball events dataset in .csv format, we can obtain an comparable results hereafter.** 
  - As a baseline, we retrain the model with Tennis Dataset and obtain 4643 rows of test set, accuracy = 0.982 and recall = 0.624 
  - With our Pickleball events dataset, we obtain 98 rows of test set, accuracy = 0.928 and recall = 0.428
